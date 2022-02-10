@@ -23,11 +23,6 @@ class USSSchwarzenegger extends Ship {
 
         if (this.accuracy > rdmN) 
         {       
-            document.getElementById("eStat").innerHTML = 
-            "Hull: " + opp.hull  + "<br>"
-            + "FirePower: " + opp.firepower + "<br>"
-            + "Accuracy: " + opp.accuracy;
-
             console.log("I hit " + this.firepower + " on their " + opp.hull + " hull")
 
             opp.hull -= this.firepower;
@@ -59,17 +54,13 @@ class Enemy extends Ship {
 
         if (this.accuracy > rdmN)
         {      
-            document.getElementById("pStat").innerHTML = 
-            "Hull: " + opp.hull  + "<br>"
-            + "FirePower: " + opp.firepower + "<br>"
-            + "Accuracy: " + opp.accuracy;
 
             console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
 
             opp.hull -= this.firepower;
             if (opp.hull <= 0) {
                 opp.alive = false;
-                console.log("Alien has died.");
+                console.log("You have died.");
             }
         } 
         else 
@@ -83,27 +74,29 @@ class Enemy extends Ship {
 function battle(p, eA)
 {
     let cont = window.prompt("Attack y/n", "y");
-
-    if (cont.toLowerCase() == "y")
+    if (cont == null || cont.toLowerCase() == "n") {
+        console.log("u scardi cat")
+    }
+    else if (cont.toLowerCase() == "y")
     {
         for(let i = 0; i < eA.length; i++)
         {
             if (p.alive)
             {
                 console.log("\n\nBattle " + (i + 1))
-                while (eA[i].alive && eA[i])
+                while (eA[i].alive)
                 {  
                     p.attack(eA[i]);
                     if (eA[i].alive == true)
                     {
                         eA[i].attack(p);
+                        if (!p.alive) {break;}
                     }
                 }
-            }
+            } 
+            updateHTMLp(p)
+            updateHTMLe(eA[i])
         }
-    }
-    else if (cont.toLowerCase() == "n") {
-        console.log("u scardi cat")
     }
     else {
         alert(`I don't understand your response.\n\n Try again!`)
@@ -119,11 +112,26 @@ function makeFleet(num)
     }
 }
 
+function updateHTMLp(opp)
+{
+    document.getElementById("pStat").innerHTML = 
+    "Hull: " + opp.hull  + "<br>"
+    + "FirePower: " + opp.firepower + "<br>"
+    + "Accuracy: " + opp.accuracy;
+}
+
+function updateHTMLe(opp)
+{
+    document.getElementById("eStat").innerHTML = 
+    "Hull: " + opp.hull  + "<br>"
+    + "FirePower: " + opp.firepower + "<br>"
+    + "Accuracy: " + opp.accuracy;
+}
 
 let schw = new USSSchwarzenegger(20, 5, 0.7);
 let enFleet = [];
 let rdmF = Math.random() * 50;
-makeFleet(20);
+makeFleet(50);
 
 
 // console.log(schw)
