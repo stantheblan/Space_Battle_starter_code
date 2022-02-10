@@ -18,11 +18,18 @@ class USSSchwarzenegger extends Ship {
     }    
     attack(opp)
     {
+        console.log(opp)
         let rdmN = Math.random();
 
         if (this.accuracy > rdmN) 
-        {
+        {       
+            document.getElementById("eStat").innerHTML = 
+            "Hull: " + opp.hull  + "<br>"
+            + "FirePower: " + opp.firepower + "<br>"
+            + "Accuracy: " + opp.accuracy;
+
             console.log("I hit " + this.firepower + " on their " + opp.hull + " hull")
+
             opp.hull -= this.firepower;
             if (opp.hull <= 0) {
                 opp.alive = false;
@@ -47,13 +54,19 @@ class Enemy extends Ship {
     }
     attack(opp)
     {
+        console.log(opp)
         let rdmN = Math.random();
 
         if (this.accuracy > rdmN)
         {      
-            opp.hull -= this.firepower;
+            document.getElementById("pStat").innerHTML = 
+            "Hull: " + opp.hull  + "<br>"
+            + "FirePower: " + opp.firepower + "<br>"
+            + "Accuracy: " + opp.accuracy;
+
             console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
 
+            opp.hull -= this.firepower;
             if (opp.hull <= 0) {
                 opp.alive = false;
                 console.log("Alien has died.");
@@ -69,10 +82,10 @@ class Enemy extends Ship {
 
 function battle(p, eA)
 {
-    //let cont = window.prompt("Attack y/n", "y");
+    let cont = window.prompt("Attack y/n", "y");
 
-    // if (cont.toLowerCase() == "y")
-    // {
+    if (cont.toLowerCase() == "y")
+    {
         for(let i = 0; i < eA.length; i++)
         {
             if (p.alive)
@@ -88,14 +101,14 @@ function battle(p, eA)
                 }
             }
         }
-    // }
-    // else if (cont.toLowerCase() == "n") {
-    //     console.log("u scardi cat")
-    // }
-    // else {
-    //     alert(`I don't understand your response.\n\n Try again!`)
-    //     battle(p, eA)
-    // }
+    }
+    else if (cont.toLowerCase() == "n") {
+        console.log("u scardi cat")
+    }
+    else {
+        alert(`I don't understand your response.\n\n Try again!`)
+        battle(p, eA)
+    }
 }
 
 function makeFleet(num)
