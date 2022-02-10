@@ -54,7 +54,6 @@ class Enemy extends Ship {
 
         if (this.accuracy > rdmN)
         {      
-
             console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
 
             opp.hull -= this.firepower;
@@ -83,16 +82,22 @@ function battle(p, eA)
         {
             if (p.alive)
             {
-                console.log("\n\nBattle " + (i + 1))
-                while (eA[i].alive)
-                {  
-                    p.attack(eA[i]);
-                    if (eA[i].alive == true)
-                    {
-                        eA[i].attack(p);
-                        if (!p.alive) {break;}
+                
+                let ans = window.prompt("Do you want to retreat? You have " + p.hull + " against their " + eA[i].hull, "n");
+                if (ans.toLowerCase() == "n")
+                {
+                    console.log("\n\nBattle " + (i + 1))
+                    while (eA[i].alive)
+                    {  
+                        p.attack(eA[i]);
+                        if (eA[i].alive == true)
+                        {
+                            eA[i].attack(p);
+                            if (!p.alive) {break;}
+                        }
                     }
                 }
+                else {break}
             } 
             updateHTMLp(p)
             updateHTMLe(eA[i])
