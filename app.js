@@ -50,9 +50,10 @@ class Enemy extends Ship {
         let rdmN = Math.random();
 
         if (this.accuracy > rdmN)
-        {
-            console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
+        {      
             opp.hull -= this.firepower;
+            console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
+
             if (opp.hull <= 0) {
                 opp.alive = false;
                 console.log("Alien has died.");
@@ -74,13 +75,16 @@ function battle(p, eA)
     // {
         for(let i = 0; i < eA.length; i++)
         {
-            while (p.alive && eA[i].alive && eA[i])
-            {  
+            if (p.alive)
+            {
                 console.log("\n\nBattle " + (i + 1))
-                p.attack(eA[i]);
-                if (eA[i].alive == true)
-                {
-                    eA[i].attack(p);
+                while (eA[i].alive && eA[i])
+                {  
+                    p.attack(eA[i]);
+                    if (eA[i].alive == true)
+                    {
+                        eA[i].attack(p);
+                    }
                 }
             }
         }
@@ -103,11 +107,10 @@ function makeFleet(num)
 }
 
 
-
 let schw = new USSSchwarzenegger(20, 5, 0.7);
 let enFleet = [];
-let rdmF = Math.random() * 10;
-makeFleet(50);
+let rdmF = Math.random() * 50;
+makeFleet(20);
 
 
 // console.log(schw)
@@ -119,6 +122,6 @@ makeFleet(50);
 // console.log(schw)
 // console.log(en)
 
-//console.log(enFleet)
+console.log(enFleet)
 
 battle(schw, enFleet);
