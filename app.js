@@ -74,9 +74,9 @@ function battle(p, eA)
     // {
         for(let i = 0; i < eA.length; i++)
         {
-            console.log("\n\nBattle " + (i + 1))
-            while (p.alive && eA[i].alive)
+            while (p.alive && eA[i].alive && eA[i])
             {  
+                console.log("\n\nBattle " + (i + 1))
                 p.attack(eA[i]);
                 if (eA[i].alive == true)
                 {
@@ -106,7 +106,8 @@ function makeFleet(num)
 
 let schw = new USSSchwarzenegger(20, 5, 0.7);
 let enFleet = [];
-makeFleet(6);
+let rdmF = Math.random() * 10;
+makeFleet(50);
 
 
 // console.log(schw)
@@ -118,6 +119,6 @@ makeFleet(6);
 // console.log(schw)
 // console.log(en)
 
-console.log(enFleet)
+//console.log(enFleet)
 
 battle(schw, enFleet);
