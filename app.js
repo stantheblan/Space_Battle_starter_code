@@ -26,8 +26,11 @@ class USSSchwarzenegger extends Ship {
             console.log("I hit " + this.firepower + " on their " + opp.hull + " hull")
 
             opp.hull -= this.firepower;
-            if (opp.hull <= 0) {
+
+            if (opp.hull <= 0)
+            {
                 opp.alive = false;
+                boolFleet[getIndex()] = false;
                 console.log("Alien has died.");
             }
         } 
@@ -57,7 +60,8 @@ class Enemy extends Ship {
             console.log("They hit " + this.firepower + " on my " + opp.hull + " hull")
 
             opp.hull -= this.firepower;
-            if (opp.hull <= 0) {
+            if (opp.hull <= 0) 
+            {
                 opp.alive = false;
                 console.log("You have died.");
             }
@@ -80,9 +84,9 @@ function battle(p, eA)
     {
         for(let i = 0; i < eA.length; i++)
         {
+            setIndex(i)
             if (p.alive)
             {
-                
                 let ans = window.prompt("Do you want to retreat? You have " + p.hull + " against their " + eA[i].hull, "n");
                 if (ans.toLowerCase() == "n")
                 {
@@ -114,6 +118,7 @@ function makeFleet(num)
     for (let i = 0; i < num; i++)
     {
         enFleet[i] = new Enemy();
+        boolFleet[i] = true;
     }
 }
 
@@ -133,10 +138,24 @@ function updateHTMLe(opp)
     + "Accuracy: " + opp.accuracy;
 }
 
+let checker = arr => arr.every(v => v === false)
+
+function getIndex()
+{
+    return indexA;
+}
+
+function setIndex(i)
+{
+    indexA = i;
+}
+
 let schw = new USSSchwarzenegger(20, 5, 0.7);
 let enFleet = [];
+let boolFleet = [];
+let indexA = 0;
 let rdmF = Math.random() * 50;
-makeFleet(50);
+makeFleet(5);
 
 
 // console.log(schw)
@@ -149,5 +168,7 @@ makeFleet(50);
 // console.log(en)
 
 console.log(enFleet)
-
+// enFleet.every(checkPWin)
+console.log(checker(boolFleet))
 battle(schw, enFleet);
+console.log(checker(boolFleet))
