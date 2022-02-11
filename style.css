@@ -39,7 +39,6 @@
     align-items: center;
     font-size: 2em;
     box-shadow: 0px 0px 20px 10px white;
-
 }
 .playerImage{
     border: 1px solidblack;
@@ -50,9 +49,6 @@
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 20px 10px white;
-    
-
-    
 }
 .playerStats{
     display: flex;
@@ -65,13 +61,11 @@
     font-size: 1.5em;
     box-shadow: 0px 0px 20px 10px white;
     border-radius: 2%;
-
-
 }
 .enemyImage{
     border: 1px solidblack;
     width: 30vw;
-    height: 35vh;
+    height: 40vh;
     background-image: url("images/enemy.gif");
     background-size: cover ;
     background-position: center;
